@@ -17,6 +17,15 @@ fn main() {
         path: std::path::PathBuf::from(path)
     };
     */
+    let pb = indicatif::ProgressBar::new(100);
+    for i in 0..100 {
+        println!("{}", i);
+        pb.println(format!("[+] finished: #{}", i));
+        pb.inc(1);
+
+
+    }
+    pb.finish_with_message("done.");
 
     let args = Cli::from_args();
     println!("{:?}", args);
