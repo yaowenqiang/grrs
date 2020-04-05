@@ -1,3 +1,6 @@
+use log::{info, warn};
+extern crate env_logger;
+#[macro_use]  extern crate log;
 use structopt::StructOpt;
 #[derive(Debug)]
 #[derive(StructOpt)]
@@ -8,6 +11,9 @@ struct Cli {
 }
 
 fn main() {
+env_logger::init();
+info!("starting up.");
+warn!("Oops! nothing implemented!");
     /*
     let pattern = std::env::args().nth(1).expect("no pattern given");
     let path = std::env::args().nth(2).expect("no path given");
