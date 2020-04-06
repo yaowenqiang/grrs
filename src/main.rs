@@ -1,5 +1,8 @@
+//export RUST_LOG=error
 use log::{info, warn};
 extern crate env_logger;
+use std:: thread;
+use std::time::Duration;
 #[macro_use]  extern crate log;
 use structopt::StructOpt;
 #[derive(Debug)]
@@ -11,6 +14,12 @@ struct Cli {
 }
 
 fn main() {
+
+    ctrlc::set_handler(move || {
+        println!("received Ctrl+C!");
+    }).expect("Error setting Ctrl+C handler!");
+
+thread::sleep(Duration::from_secs(2));
 env_logger::init();
 info!("starting up.");
 warn!("Oops! nothing implemented!");
@@ -25,8 +34,8 @@ warn!("Oops! nothing implemented!");
     */
     let pb = indicatif::ProgressBar::new(100);
     for i in 0..100 {
-        println!("{}", i);
-        pb.println(format!("[+] finished: #{}", i));
+        //println!("{}", i);
+        //pb.println(format!("[+] finished: #{}", i));
         pb.inc(1);
 
 
