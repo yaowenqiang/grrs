@@ -1,4 +1,15 @@
 //export RUST_LOG=error
+use serde::{Serialize, Deserialize};
+#[derive(Debug, Serialize, Deserialize)]
+struct MyConfig {
+    name: String,
+    confy: bool,
+    foo: i64,
+}
+
+impl ::std::default::Default for MyConfig {
+    fn default () -> Self {Self {name: "jack".into(), confy: true, foo:1}}
+}
 use log::{info, warn};
 extern crate env_logger;
 use std:: thread;
@@ -13,7 +24,20 @@ struct Cli {
     path: std::path::PathBuf,
 }
 
-fn main() {
+fn main()  {
+    /*
+    let cfg = match confy::load("my_app") {
+        Ok(config) =>  config,
+        Err(err) => panic!("load config failed {}", err)
+    };
+    */
+    let myConfg = MyConfig{
+        name:"abc".into(),
+        confy: true,
+        foo: 1
+    };
+    confy::store("my_config", myConfg);
+    //println!("{:#?}", cfg);
 
     ctrlc::set_handler(move || {
         println!("received Ctrl+C!");
