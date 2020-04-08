@@ -1,4 +1,5 @@
 //export RUST_LOG=error
+use human_panic::setup_panic;
 use serde::{Serialize, Deserialize};
 #[derive(Debug, Serialize, Deserialize)]
 struct MyConfig {
@@ -24,6 +25,10 @@ struct Cli {
     path: std::path::PathBuf,
 }
 
+
+
+
+
 fn main()  {
     /*
     let cfg = match confy::load("my_app") {
@@ -31,6 +36,8 @@ fn main()  {
         Err(err) => panic!("load config failed {}", err)
     };
     */
+    setup_panic!();
+    panic!("hello world");
     let myConfg = MyConfig{
         name:"abc".into(),
         confy: true,
